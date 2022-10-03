@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthorAPIController;
+use App\Http\Controllers\API\BooksAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
@@ -17,6 +18,8 @@ use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
 */
 
 Route::resource('authors', AuthorAPIController::class);
+
+Route::resource('books', BooksAPIController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

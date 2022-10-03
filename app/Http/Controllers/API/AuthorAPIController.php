@@ -22,14 +22,27 @@ class AuthorAPIController extends Controller
     public function index(): JsonResponse
     {
         $authors = Author::all();
-        return response()->json(
+
+        $response = response()->json(
             [
-                'status' => true,
-                'message' => "Retrieved successfully.",
-                'authors' => $authors
+                'status' => false,
+                'message' => "No Authors Found",
+                'authors' => null
             ],
-            200
+            404  # Not Found
         );
+
+        if ($authors->count() > 0) {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => "Retrieved successfully.",
+                    'authors' => $authors
+                ],
+                200
+            );
+        }
+        return $response;
     }
 
     /**
@@ -43,26 +56,18 @@ class AuthorAPIController extends Controller
         $validated = $request->validated();
         $validated['is_company'] = $validated['is_company'] ?? 0;
 
-        /*  Option 1:  Move given name into blank family name.
-         *
-         *  If using this option, remove the Option 2 block
-         *  and uncomment the code below
-         */
-        // if (!isset($validated['family_name']) ) {
-        //     $validated['family_name'] = $validated['given_name'];
-        //     $validated['given_name'] = null;
-        // }
-
+        /*  Option 1:  Move given name into blank family name. */
+        if (!isset($validated['family_name'])) {
+            $validated['family_name'] = $validated['given_name'];
+            $validated['given_name'] = null;
+        }
 
         /*  Option 2:  Move family name into blank given name.
-         *
-         *  If using this option, remove the Option 1 block
-         *  and uncomment the code below
-         */
         if (!isset($validated['given_name'])) {
             $validated['given_name'] = $validated['family_name'];
             $validated['family_name'] = null;
         }
+        */
 
         $author = Author::create($validated);
 

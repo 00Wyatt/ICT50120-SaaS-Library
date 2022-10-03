@@ -16,9 +16,9 @@ class Book extends Model
         'edition',
         'isbn_10',
         'isbn_13',
-        'height',
         'genre',
         'sub_genre',
+        'height',
     ];
 
     /**

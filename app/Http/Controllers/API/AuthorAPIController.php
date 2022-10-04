@@ -22,14 +22,27 @@ class AuthorAPIController extends Controller
     public function index(): JsonResponse
     {
         $authors = Author::all();
-        return response()->json(
+
+        $response = response()->json(
             [
-                'status' => true,
-                'message' => "Retrieved successfully.",
-                'authors' => $authors
+                'status' => false,
+                'message' => "No Authors Found",
+                'authors' => null
             ],
-            200
+            404  # Not Found
         );
+
+        if ($authors->count() > 0) {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => "Retrieved successfully.",
+                    'authors' => $authors
+                ],
+                200
+            );
+        }
+        return $response;
     }
 
     /**

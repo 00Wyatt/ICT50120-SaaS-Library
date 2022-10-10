@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\AuthorAPIController;
 use App\Http\Controllers\API\BooksAPIController;
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
 |
 */
 
+
+
+Route::post('register',[AuthAPIController::class,'register']);
+Route::post('login', [AuthAPIController::class, 'login']);
+
 Route::resource('authors', AuthorAPIController::class);
 
 Route::resource('books', BooksAPIController::class);
@@ -24,7 +30,6 @@ Route::resource('books', BooksAPIController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 /**
  * Dummy Healthcheck

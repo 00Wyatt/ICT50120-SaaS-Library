@@ -65,7 +65,6 @@ class BooksAPIController extends Controller
             200
         );
 
-        // try authors()
     }
 
     /**

@@ -72,7 +72,8 @@ class StoreBookAPIRequest extends FormRequest
     public function messages()
     {
         return [
-            'title' => 'A title is required'
+            'title.required' => 'A title is required',
+            'genre.required' => 'A genre is required'
         ];
     }
 }

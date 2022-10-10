@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateAPIRequest;
 use App\Http\Requests\StoreAuthorAPIRequest;
 use App\Http\Requests\UpdateAuthorAPIRequest;
+use App\Http\Requests\PaginationAPIRequest;
 use App\Models\Author;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,16 +14,46 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
+
+/**
+ * @group Author API
+ *
+ * API endpoints for managing authors
+ */
 class AuthorAPIController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Browse the list of all authors
+     *
+     * @bodyParams
+     *
+     * @response {
+     *      "status": true,
+     *      "message": "Retrieved successfully",
+     *      "authors": "authors": [
+     *          {
+     *              "id": 1,
+     *              "given_name": "UNKNOWN",
+     *              "family_name": "AUTHOR",
+     *              "is_company": 0,
+     *              "created_at": "2022-09-10T14:45:22.000000Z",
+     *              "updated_at": "2022-09-10T14:45:22.000000Z"
+     *          }, ...
+     *      ]
+     * }
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(PaginationAPIRequest $request): JsonResponse
     {
+<<<<<<< HEAD
         $authors = Author::all();
+=======
+        // $authors = Author::all();
+        // $authors = Author::paginate($validated["per_page"]);
+        $authors = Author::paginate($request["per_page"]);
+>>>>>>> 1688638c1667644849953632a14a49850542fdd1
 
         $response = response()->json(
             [
@@ -45,6 +77,7 @@ class AuthorAPIController extends Controller
         return $response;
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -57,7 +90,11 @@ class AuthorAPIController extends Controller
         $validated['is_company'] = $validated['is_company'] ?? 0;
 
         /*  Option 1:  Move given name into blank family name. */
+<<<<<<< HEAD
         if (!isset($validated['family_name'])) {
+=======
+        if (!isset($validated['family_name']) ) {
+>>>>>>> 1688638c1667644849953632a14a49850542fdd1
             $validated['family_name'] = $validated['given_name'];
             $validated['given_name'] = null;
         }
@@ -66,8 +103,12 @@ class AuthorAPIController extends Controller
         if (!isset($validated['given_name'])) {
             $validated['given_name'] = $validated['family_name'];
             $validated['family_name'] = null;
+<<<<<<< HEAD
         }
         */
+=======
+        } */
+>>>>>>> 1688638c1667644849953632a14a49850542fdd1
 
         $author = Author::create($validated);
 
@@ -84,11 +125,20 @@ class AuthorAPIController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Retrieve an author
+     *
+     * Given a URL parameter of the ID of an Author, the author's details are returned with status 200
+     *
+     * If the Author ID is invalid then a status code of 404 is returned.
      *
      * @param int $id
      * @return JsonResponse
      */
+    // #[UrlParam("id", "int", "The author's ID.", required: true, example: 7)]
+    // #[Response('"authors": [{"id": 7,"given_name": "Kevin","family_name": "Potts","is_company": 0,"created_at": "2022-09-10T14:45:22.000000Z","updated_at": "2022-09-10T14:45:22.000000Z"}]', 200, "Retrieved successfully.")]
+    // #[ResponseField("status", "Success or failure indicator.")]
+    // #[ResponseField("message", "Accompanying message for the status result.")]
+    // #[ResponseField("authors", "The author details.")]
     public function show(int $id): JsonResponse
     {
         $author = Author::query()->where('id', $id)->get();

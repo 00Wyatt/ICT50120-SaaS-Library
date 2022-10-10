@@ -28,33 +28,34 @@ class StoreBookAPIRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                'max:64',
+                'max:255',
             ],
             'subtitle' => [
-                'max:128',
+                'max:255',
             ],
             'year_published' => [
-                'nullable'
+                'numeric',
+                'min:1450'
             ],
             'edition' => [
-                'integer'
+                'integer',
+                'min:1'
             ],
             'isbn_10' => [
-                'min:10',
-                'max:10'
+                'size:10'
             ],
             'isbn_13' => [
-                'min:13',
-                'max:13'
+                'size:13'
             ],
             'height' => [
+                'min:0',
                 'smallInteger'
             ],
             'genre' => [
-                'max:32'
+                'max:255'
             ],
             'sub_genre' => [
-                'max:32'
+                'max:255'
             ],
         ];
     }

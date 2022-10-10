@@ -14,15 +14,14 @@ return new class extends Migration {
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->required();
-            $table->string('subtitle')->nullable();
-            $table->smallInteger('year_published')->zerofill()->nullable();
-            $table->integer('edition')->nullable();
+            $table->string('title', 255)->required();
+            $table->string('subtitle', 255)->nullable();
+            $table->unsignedSmallInteger('year_published')->zerofill()->nullable();
+            $table->unsignedInteger('edition')->nullable();
             $table->string('isbn_10', 10)->nullable();
             $table->string('isbn_13', 13)->nullable();
-            $table->string('genre', 32)->nullable();
-            $table->string('sub_genre', 32)->nullable();
-            $table->smallInteger('height')->nullable();
+            $table->unsignedSmallInteger('height')->nullable();
+            $table->boolean('on_loan')->default(false);
             $table->timestamps();
         });
     }

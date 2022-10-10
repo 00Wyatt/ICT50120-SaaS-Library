@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAuthorAPIRequest;
 use App\Http\Requests\UpdateAuthorAPIRequest;
+use App\Http\Requests\PaginationAPIRequest;
 use App\Models\Author;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,9 +20,11 @@ class AuthorAPIController extends Controller
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(PaginationAPIRequest $request): JsonResponse
     {
-        $authors = Author::all();
+        // $authors = Author::all();
+        // $authors = Author::paginate($validated["per_page"]);
+        $authors = Author::paginate($request["per_page"]);
 
         $response = response()->json(
             [
@@ -56,26 +59,17 @@ class AuthorAPIController extends Controller
         $validated = $request->validated();
         $validated['is_company'] = $validated['is_company'] ?? 0;
 
-        /*  Option 1:  Move given name into blank family name.
-         *
-         *  If using this option, remove the Option 2 block
-         *  and uncomment the code below
-         */
-        // if (!isset($validated['family_name']) ) {
-        //     $validated['family_name'] = $validated['given_name'];
-        //     $validated['given_name'] = null;
-        // }
-
+        /*  Option 1:  Move given name into blank family name. */
+        if (!isset($validated['family_name']) ) {
+            $validated['family_name'] = $validated['given_name'];
+            $validated['given_name'] = null;
+        }
 
         /*  Option 2:  Move family name into blank given name.
-         *
-         *  If using this option, remove the Option 1 block
-         *  and uncomment the code below
-         */
         if (!isset($validated['given_name'])) {
             $validated['given_name'] = $validated['family_name'];
             $validated['family_name'] = null;
-        }
+        } */
 
         $author = Author::create($validated);
 

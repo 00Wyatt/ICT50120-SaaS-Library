@@ -2,6 +2,7 @@
 
 Steps to set up this application from scratch (as in build it yourself).
 
+
 ## Getting the Terminal Set Up
 
 Open Windows Terminal (or iTerm on the Mac).
@@ -106,9 +107,16 @@ sail artisan make:model AuthorBook -m
 > Remember that Models are SINGULAR names, whereas the table names are pluralised.
 > For example, the `Author` model will have a table named `authors`.
 >
-> Never pluralise the Model name.
+> **Never** pluralise the Model name.
 
 ## Migrations and Models
+
+> ‼ **IMPORTANT** ‼
+> 
+> Ensure you verify the most up-to-date version of the 
+> database structure shown in the ERD in the document 
+> [ReadMe-00-Library-ER.md](ReadMe-00-Library-ER.md) and update any 
+> data structures as required.
 
 Edit the migrations, and models for the Author, Book and Author Book tables.
 
@@ -199,11 +207,11 @@ Normally, we would perform the seeding in this order:
 - Books
 - Author Books
 
-This is because the Author is the highest priority for this data, followed by books, and then the Author-Books model that
-joins these two tables.
+This is because the Author is the highest priority for this data, followed by books, and then 
+the Author-Books model that joins these two tables.
 
-We will create a few authors without books, including an UNKNOWN author and corporate author, to act as a placeholder/error if
-needed.
+We will create a few authors without books, including an UNKNOWN author and corporate author, 
+to act as a placeholder/error if needed.
 
 Open the database/seeders/AuthorSeeder.php file and add the following to the `run` method:
 
@@ -314,7 +322,7 @@ foreach ($seedBooks as $book) {
 
 ```
 
-Full copy of the code is shown in [/database/seeders/BookSeeder.php](../database/seeders/BookSeeder.php).
+Full copy of the code is shown in [/database/seeders/BookSeeder.php](/database/seeders/BookSeeder.php).
 
 Finally, we add the Author and Book seeders to the DatabaseSeeder.
 

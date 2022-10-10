@@ -33,9 +33,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/authors
+    uri: api/register
     metadata:
-      title: 'Store a newly created resource in storage.'
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
       description: ''
       authenticated: false
       custom: []
@@ -43,7 +47,9 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
+    cleanQueryParameters: []
     bodyParameters:
       given_name:
         name: given_name
@@ -62,31 +68,9 @@ endpoints:
       is_company:
         name: is_company
         description: ''
-        required: false
-        example: false
-        type: boolean
-        custom: []
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - GET
-    uri: 'api/authors/{id}'
-    metadata:
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the author.'
         required: true
-        example: 1
-        type: integer
+        example: ullam
+        type: string
         custom: []
     queryParameters: []
     bodyParameters: []
@@ -148,35 +132,20 @@ endpoints:
         custom: []
     responses: []
     responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
   -
     httpMethods:
-      - DELETE
-    uri: 'api/authors/{id}'
+      - POST
+    uri: api/login
     metadata:
-      title: 'Remove the specified resource from storage.'
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the author.'
-        required: true
-        example: 1
-        type: integer
-        custom: []
-    queryParameters: []
-    bodyParameters: []
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - GET
-    uri: api/user
-    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
       title: ''
       description: ''
       authenticated: false
@@ -185,8 +154,42 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/user
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
     responses:
       -
         status: 401
@@ -196,12 +199,22 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: '*'
         description: null
+        custom: []
     responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
   -
     httpMethods:
       - GET
     uri: api/health
     metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
       title: ''
       description: ''
       authenticated: false
@@ -210,8 +223,12 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
     responses:
       -
         status: 200
@@ -220,7 +237,13 @@ endpoints:
           cache-control: 'must-revalidate, no-cache, no-store, post-check=0, pre-check=0, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '57'
+          x-ratelimit-remaining: '58'
           access-control-allow-origin: '*'
         description: null
+        custom: []
     responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
